@@ -7,6 +7,7 @@ const app = express();
 
 //Carga de Rutas
 const userRoutes = require("./routers/user");
+const postRoutes = require("./routers/post");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 // Router
 app.use(`/api/${API_VERSION}`, userRoutes);
+app.use(`/api/${API_VERSION}`, postRoutes);
 
 app.use(function (req, res, next) {
   next(createError(404));
