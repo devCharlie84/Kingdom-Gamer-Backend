@@ -1,18 +1,54 @@
 const express = require("express");
 const UserController = require("../controllers/user");
+const multiparty = require("connect-multiparty");
+
+const middleware_auth = require("../middlewares/authenticated");
+const middleware_upload_avatar = multiparty({ uploadDir: "./uploads/avatar" });
 
 const api = express.Router();
 
 api.post("/sign-up", UserController.signUp);
 
-api.get("/get-users", UserController.getUsers);
+api.post("/sign-in", UserController.signIn);
 
-api.get("/get-user/:id", UserController.getUser);
+api.post(
+  "/sign-up-admin",
+  [middleware_auth.ensureAuth],
+  UserController.signUpAdmin
+);
 
-api.put("/update-user/:id", UserController.updateUser);
+api.get("/users", [middleware_auth.ensureAuth], UserController.getUsers);
 
-api.delete("/delete-user/:id", UserController.deleteUser);
+api.get(
+  "/users-active",
+  [middleware_auth.ensureAuth],
+  UserController.getUsersActive
+);
 
-api.put("/activate-user/:id", UserController.activateUser);
+api.get("/get-avatar/:avatarName", UserController.getAvatar);
+
+api.put(
+  "/upload-avatar/:id",
+  [middleware_auth.ensureAuth, middleware_upload_avatar],
+  UserController.uploadAvatar
+);
+
+api.put(
+  "/update-user/:id",
+  [middleware_auth.ensureAuth],
+  UserController.updateUser
+);
+
+api.put(
+  "/activate-user/:id",
+  [middleware_auth.ensureAuth],
+  UserController.activateUser
+);
+
+api.delete(
+  "/delete-user/:id",
+  [middleware_auth.ensureAuth],
+  UserController.deleteUser
+);
 
 module.exports = api;

@@ -6,8 +6,11 @@ const { API_VERSION } = require("./config");
 const app = express();
 
 //Carga de Rutas
+const authRoutes = require("./routers/auth");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
+const enlaceRoutes = require("./routers/enlace");
+const newsletterRoutes = require("./routers/newsletter");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,8 +28,11 @@ app.use((req, res, next) => {
 });
 
 // Router
+app.use(`/api/${API_VERSION}`, authRoutes);
 app.use(`/api/${API_VERSION}`, userRoutes);
 app.use(`/api/${API_VERSION}`, postRoutes);
+app.use(`/api/${API_VERSION}`, enlaceRoutes);
+app.use(`/api/${API_VERSION}`, newsletterRoutes);
 
 app.use(function (req, res, next) {
   next(createError(404));

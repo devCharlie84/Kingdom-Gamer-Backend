@@ -1,11 +1,27 @@
+const mongoose = require("mongoose");
 const app = require("./app");
 const port = process.env.PORT || 4000;
-const { API_VERSION, IP_SERVER } = require("./config");
+const { API_VERSION, IP_SERVER, PORT_DB } = require("./config");
 
-app.listen(port, () => {
-  console.log("#####################################");
-  console.log(`###### LISTENING ON PORT ${port} #######`);
-  console.log("#####################################");
+mongoose.set("useFindAndModify", false);
 
-  console.log(`http://${IP_SERVER}:${port}/api/${API_VERSION}/`);
-});
+mongoose.connect(
+  `mongodb://${IP_SERVER}:${PORT_DB}/kingdomgamer`,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, res) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log("Conexión con Mongoose correctamente");
+
+      app.listen(port, () => {
+        console.log("########################");
+        console.log("##### KINGDOM GAMER ####");
+        console.log("######## BACKEND #######");
+        console.log("########################");
+
+        console.log(`http://${IP_SERVER}:${port}/api/${API_VERSION}/`);
+      });
+    }
+  }
+);

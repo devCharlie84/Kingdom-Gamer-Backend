@@ -1,92 +1,188 @@
 const bcrypt = require("bcrypt-nodejs");
+const jwt = require("../services/jwt");
+const User = require("../models/user");
+const fs = require("fs");
+const path = require("path");
 
-const Users = [];
-
-// const User = {
-//   id: null,
-//   name: "",
-//   lastname: "",
-//   email: "",
-//   password: "",
-//   role: "",
-//   active: false,
-// };
+const Mailer = require("../templates/newsletter-template");
 
 function signUp(req, res) {
-  const User = {};
-  const { name, lastname, email, password, repeatPassword, role } = req.body;
+  const user = new User();
 
-  if (!name || !lastname || !email || !role) {
+  const { name, lastname, email, password, repeatPassword } = req.body;
+  user.name = name;
+  user.lastname = lastname;
+  user.email = email.toLowerCase();
+  user.role = "admin";
+  user.active = false;
+
+  if (!password || !repeatPassword) {
     res
       .status(404)
-      .send({ code: 404, message: "Todos los campos son obligatorios." });
+      .send({ message: "Las contraseñas son campos obligatorios." });
   } else {
-    if (!password || !repeatPassword) {
-      res.status(404).send({
-        code: 404,
-        message: "Las contraseñas son campos obligatorios.",
-      });
+    if (password !== repeatPassword) {
+      res.status(404).send({ message: "Las contraseñas deben ser iguales." });
     } else {
-      if (password !== repeatPassword) {
-        res
-          .status(404)
-          .send({ code: 404, message: "Las contraseñas son distintas." });
-      } else {
-        bcrypt.hash(password, null, null, function (error, hash) {
-          if (error) {
-            res.status(500).send({
-              code: 500,
-              message: "Error al encriptar la contraseña.",
-            });
-          } else {
-            User.id = Users.length + 1;
-            User.name = name;
-            User.lastname = lastname;
-            User.email = email.toLowerCase();
-            User.role = role;
-            User.active = false;
+      bcrypt.hash(password, null, null, function (err, hash) {
+        if (err) {
+          res
+            .status(500)
+            .send({ message: "Error al encriptar la contraseña." });
+        } else {
+          user.password = hash;
 
-            User.password = hash;
-
-            res.status(201).send({ code: 201, User: User });
-            Users.push(User);
-          }
-        });
-      }
+          user.save((err, userStored) => {
+            if (err) {
+              res.status(500).send({
+                message: "Cuenta ya asociada con este correo electrónico.",
+              });
+            } else {
+              if (!userStored) {
+                res.status(404).send({ message: "Error al crear Usuario." });
+              } else {
+                res.status(200).send({ user: userStored });
+                Mailer.sendEmailRegister(
+                  userStored.name,
+                  userStored.lastname,
+                  userStored.email
+                );
+              }
+            }
+          });
+        }
+      });
     }
   }
 }
 
-function getUsers(req, res) {
-  if (Users.length === 0) {
-    res
-      .status(404)
-      .send({ code: 404, message: "No se ha encontrado ningún Usuario" });
-  } else {
-    // const Elements = [];
-    // Users.forEach((element) => {
-    //   Elements.push(element);
-    // });
-    res.status(200).send({ code: 200, Users });
-  }
+function signIn(req, res) {
+  const params = req.body;
+  const email = params.email.toLowerCase();
+  const password = params.password;
+
+  User.findOne({ email }, (error, userStored) => {
+    if (error) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userStored) {
+        res.status(404).send({
+          message: "Correo electrónico no asociado a ninguna cuenta.",
+        });
+      } else {
+        bcrypt.compare(password, userStored.password, (error, success) => {
+          if (error) {
+            res.status(500).send({ message: "Error del servidor." });
+          } else if (!success) {
+            res.status(404).send({ message: "La contraseña es incorrecta." });
+          } else {
+            if (!userStored.active) {
+              res.status(200).send({
+                code: 200,
+                message:
+                  "El usuario no está activo. Consulte con un administrador para su activación.",
+              });
+            } else {
+              res.status(200).send({
+                accessToken: jwt.createAccessToken(userStored),
+                refreshToken: jwt.createRefreshToken(userStored),
+              });
+            }
+          }
+        });
+      }
+    }
+  });
 }
 
-function getUser(req, res) {
-  const { id } = req.params;
-  let user = Users.find((user) => user.id == id);
+function getUsers(req, res) {
+  User.find().then((users) => {
+    if (!users) {
+      res.status(404).send({ message: "No se ha encontrado ningún Usuario" });
+    } else {
+      res.status(200).send({ users });
+    }
+  });
+}
 
-  if (!user) {
-    res
-      .status(404)
-      .send({ code: 404, message: "No se encontro ningún Usuario" });
-  } else {
-    res.status(200).send({ code: 200, user });
-  }
+function getUsersActive(req, res) {
+  const query = req.query;
+
+  User.find({ active: query.active }).then((users) => {
+    if (!users) {
+      res.status(404).send({ message: "No se ha encontrado ningún Usuario" });
+    } else {
+      res.status(200).send({ users });
+    }
+  });
+}
+
+function uploadAvatar(req, res) {
+  const params = req.params;
+
+  User.findById({ _id: params.id }, (error, userData) => {
+    if (error) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userData) {
+        res.status(404).send({ message: "Usuario no encontrado." });
+      } else {
+        let user = userData;
+
+        if (req.files) {
+          let filePath = req.files.avatar.path;
+          let fileName = filePath.replace(/^.*[\\\/]/, "");
+          // let fileSplit = filePath.split("/");
+          // let fileName = fileSplit[2];
+          let extSplit = fileName.split(".");
+          let fileExt = extSplit[1];
+
+          if (fileExt !== "png" && fileExt !== "jpg") {
+            res.status(400).send({
+              message:
+                "La extensión de la imágen no es válida. (JPG/PNG únicamente)",
+            });
+          } else {
+            user.avatar = fileName;
+            User.findByIdAndUpdate(
+              { _id: params.id },
+              user,
+              (error, userResult) => {
+                if (error) {
+                  res.status(500).send({ message: "Error del servidor." });
+                } else {
+                  if (!userResult) {
+                    res.status(404).send({ message: "Usuario no encontrado." });
+                  } else {
+                    res.status(200).send({ avatarName: fileName });
+                  }
+                }
+              }
+            );
+          }
+        }
+      }
+    }
+  });
+}
+
+function getAvatar(req, res) {
+  const avatarName = req.params.avatarName;
+  const filePath = "./uploads/avatar/" + avatarName;
+
+  fs.exists(filePath, (exists) => {
+    if (!exists) {
+      res.status(404).send({ message: "El Avatar no existe." });
+    } else {
+      res.sendFile(path.resolve(filePath));
+    }
+  });
 }
 
 async function updateUser(req, res) {
-  const { id } = req.params;
   let userData = req.body;
+  userData.email = req.body.email.toLowerCase();
+  const params = req.params;
 
   if (userData.password) {
     await bcrypt.hash(userData.password, null, null, (error, hash) => {
@@ -98,83 +194,104 @@ async function updateUser(req, res) {
     });
   }
 
-  let user = Users.find((user) => user.id == id);
-
-  if (!user) {
-    res
-      .status(404)
-      .send({ code: 404, message: "No se encontro ningún Usuario" });
-  } else {
-    if (
-      !userData.name ||
-      !userData.lastname ||
-      !userData.email ||
-      !userData.role
-    ) {
-      res
-        .status(404)
-        .send({ code: 404, message: "Todos los campos son obligatorios" });
+  User.findByIdAndUpdate({ _id: params.id }, userData, (error, userUpdate) => {
+    if (error) {
+      res.status(500).send({ message: "Error del servidor." });
     } else {
-      const index = Users.indexOf(user);
-      Users[index].name = userData.name;
-      Users[index].lastname = userData.lastname;
-      Users[index].email = userData.email;
-      Users[index].role = userData.role;
-      Users[index].password = userData.password;
-      res.status(204).send({
-        code: 204,
-        message: `Se ha actualizado el usuario ${user.name}`,
-      });
+      if (!userUpdate) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún Usuario." });
+      } else {
+        res.status(200).send({ message: "Usuario actualizado." });
+      }
     }
-  }
-}
-
-function deleteUser(req, res) {
-  const { id } = req.params;
-  let user = Users.find((user) => user.id == id);
-
-  if (!user) {
-    res
-      .status(404)
-      .send({ code: 404, message: "No se encontro ningún Usuario" });
-  } else {
-    const index = Users.indexOf(user);
-    Users.splice(index, 1);
-    res
-      .status(204)
-      .send({ code: 204, message: `Se ha eliminado el usuario ${user.name}` });
-  }
+  });
 }
 
 function activateUser(req, res) {
   const { id } = req.params;
   const { active } = req.body;
+  // User.findByIdAndUpdate(id, {active: active})
+  User.findByIdAndUpdate(id, { active }, (error, userStorage) => {
+    if (error) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userStorage) {
+        res.status(404).send({ message: "Usuario no encontrado." });
+      } else {
+        if (active === true) {
+          res.status(200).send({ message: "Usuario Activado." });
+        } else {
+          res.status(200).send({ message: "Usuario Desactivado." });
+        }
+      }
+    }
+  });
+}
 
-  let user = Users.find((user) => user.id == id);
+function deleteUser(req, res) {
+  const { id } = req.params;
 
-  if (!user) {
-    res
-      .status(404)
-      .send({ code: 404, message: "No se encontro ningún Usuario" });
+  User.findByIdAndRemove(id, (error, userDeleted) => {
+    if (error) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userDeleted) {
+        res.status(404).send({ message: "Usuario no encontrado." });
+      } else {
+        res.status(200).send({ message: "Usuario eliminado." });
+      }
+    }
+  });
+}
+
+function signUpAdmin(req, res) {
+  const user = new User();
+
+  const { name, lastname, email, role, password } = req.body;
+  user.name = name;
+  user.lastname = lastname;
+  user.email = email.toLowerCase();
+  user.role = role;
+  user.active = true;
+
+  if (!password) {
+    res.status(500).send({ message: "La contraseña es obligatoria." });
   } else {
-    const index = Users.indexOf(user);
-    if (active === true) {
-      console.log(Users[index]);
-      Users[index].active = active;
-      res.status(200).send({ code: 200, message: "Usuario Activado" });
-    }
-    if (active === false) {
-      Users[index].active = active;
-      res.status(200).send({ code: 200, message: "Usuario Desactivado" });
-    }
+    bcrypt.hash(password, null, null, (error, hash) => {
+      if (error) {
+        res.status(500).send({ message: "Error al encriptar la contraseña." });
+      } else {
+        user.password = hash;
+
+        user.save((error, userStored) => {
+          if (error) {
+            res.status(500).send({ message: "Usuario ya existente." });
+          } else {
+            if (!userStored) {
+              res.status(500).send({ message: "Error al crear Usuario." });
+            } else {
+              res
+                .status(200)
+                .send({ user: userStored, message: "Usuario creado." });
+            }
+          }
+        });
+      }
+    });
   }
 }
 
 module.exports = {
   signUp,
+  signIn,
   getUsers,
-  getUser,
+  getUsersActive,
+  uploadAvatar,
+  getAvatar,
   updateUser,
-  deleteUser,
   activateUser,
+  deleteUser,
+  signUpAdmin,
 };
