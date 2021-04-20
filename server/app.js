@@ -10,6 +10,7 @@ const authRoutes = require("./routers/auth");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
 const enlaceRoutes = require("./routers/enlace");
+const pokemonRoutes = require("./routers/pokemon");
 const newsletterRoutes = require("./routers/newsletter");
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ app.use(`/api/${API_VERSION}`, authRoutes);
 app.use(`/api/${API_VERSION}`, userRoutes);
 app.use(`/api/${API_VERSION}`, postRoutes);
 app.use(`/api/${API_VERSION}`, enlaceRoutes);
+app.use(`/api/${API_VERSION}`, pokemonRoutes);
 app.use(`/api/${API_VERSION}`, newsletterRoutes);
 
 app.use(function (req, res, next) {
