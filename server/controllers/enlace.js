@@ -15,7 +15,9 @@ function addEnlace(req, res) {
       if (!createdEnlace) {
         res.status(404).send({ message: "Error al crear el Enlace." });
       } else {
-        res.status(200).send({ message: "Enlace creado." });
+        res
+          .status(200)
+          .send({ message: "Enlace creado.", enlace: createdEnlace });
       }
     }
   });
@@ -79,7 +81,6 @@ function activateEnlace(req, res) {
 
 function deleteEnlace(req, res) {
   const { id } = req.params;
-
   Enlace.findByIdAndRemove(id, (error, enlaceDelete) => {
     if (error) {
       res.status(500).send({ message: "Error del servidor." });

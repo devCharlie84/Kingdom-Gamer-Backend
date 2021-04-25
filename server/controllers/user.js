@@ -3,7 +3,6 @@ const jwt = require("../services/jwt");
 const User = require("../models/user");
 const fs = require("fs");
 const path = require("path");
-
 const Mailer = require("../templates/newsletter-template");
 
 function signUp(req, res) {
@@ -67,14 +66,16 @@ function signIn(req, res) {
     } else {
       if (!userStored) {
         res.status(404).send({
-          message: "Correo electrónico no asociado a ninguna cuenta.",
+          message: "Correo electrónico/contraseña incorrectos.",
         });
       } else {
         bcrypt.compare(password, userStored.password, (error, success) => {
           if (error) {
             res.status(500).send({ message: "Error del servidor." });
           } else if (!success) {
-            res.status(404).send({ message: "La contraseña es incorrecta." });
+            res
+              .status(404)
+              .send({ message: "Correo electrónico/contraseña incorrectos." });
           } else {
             if (!userStored.active) {
               res.status(200).send({
@@ -231,9 +232,9 @@ function activateUser(req, res) {
 }
 
 function deleteUser(req, res) {
-  const { id } = req.params;
+  const params = req.params;
 
-  User.findByIdAndRemove(id, (error, userDeleted) => {
+  User.findByIdAndRemove({ _id: params.id }, (error, userDeleted) => {
     if (error) {
       res.status(500).send({ message: "Error del servidor." });
     } else {

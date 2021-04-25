@@ -19,9 +19,9 @@ mongoose.connect(
         console.log("##### KINGDOM GAMER ####");
         console.log("######## BACKEND #######");
         console.log("########################");
-
         console.log(`http://${IP_SERVER}:${port}/api/${API_VERSION}/`);
       });
     }
   }
 );
+module.exports = app;

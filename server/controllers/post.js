@@ -13,7 +13,9 @@ function addPost(req, res) {
           .status(400)
           .send({ code: 400, message: "No se ha podido crear el Post." });
       } else {
-        res.status(200).send({ code: 200, message: "Post creado." });
+        res
+          .status(200)
+          .send({ code: 200, message: "Post creado.", post: postStored });
       }
     }
   });

@@ -3,9 +3,9 @@ const Pokemon = require("../models/pokemon");
 
 function addPokemon(req, res) {
   const body = req.body;
-  if (body.idPokemon > 898 || body.idPokemon < 0) {
-    res.status(400).send({ code: 400, message: "El Pokemon no existe." });
-  }
+  // if (parseInt(body.idPokemon) > 898 || parseInt(body.idPokemon) < 0) {
+  //   res.status(400).send({ code: 400, message: "El Pokemon no existe." });
+  // }
   const pokemon = new Pokemon(body);
   pokemon.order = 0;
 
@@ -19,7 +19,11 @@ function addPokemon(req, res) {
           message: "No se ha podido crear el Pokemon.",
         });
       } else {
-        res.status(200).send({ code: 200, message: "Pokemon creado." });
+        res.status(200).send({
+          code: 200,
+          message: "Pokemon creado.",
+          pokemon: pokemonStored,
+        });
       }
     }
   });

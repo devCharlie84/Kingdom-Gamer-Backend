@@ -21,7 +21,18 @@
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7"
   },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "sinon": "^10.0.0",
+    "sinon-chai": "^3.6.0"
+  },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "mocha test",
+    "coverage": "nyc yarn run test"
   }
 }

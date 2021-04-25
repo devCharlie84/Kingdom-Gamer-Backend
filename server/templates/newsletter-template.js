@@ -40,7 +40,7 @@ function sendEmailNewsletter(email) {
     if (error) {
       console.log(error);
     } else {
-      console.log("Correo enviado correctamente");
+      // console.log("Correo enviado correctamente");
     }
   });
 }
@@ -84,16 +84,12 @@ function sendEmailRegister(name, lastname, email) {
     if (error) {
       console.log(error);
     } else {
-      console.log("Correo enviado correctamente");
+      // console.log("Correo enviado correctamente");
     }
   });
 }
 
-//*TO DO*//
-function sendEmailForgetPassword(email) {}
-
 module.exports = {
   sendEmailNewsletter,
   sendEmailRegister,
-  sendEmailForgetPassword,
 };
