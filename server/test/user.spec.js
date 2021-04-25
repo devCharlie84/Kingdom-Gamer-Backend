@@ -1,8 +1,7 @@
+const mongoose = require("mongoose");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const mocha = require("mocha");
-const sinon = require("sinon");
-const server = require("../index");
+const server = require("../testIndex");
 chai.should();
 
 chai.use(chaiHttp);

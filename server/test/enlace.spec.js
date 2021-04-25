@@ -1,8 +1,6 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const mocha = require("mocha");
-const sinon = require("sinon");
-const server = require("../index");
+const server = require("../testIndex");
 
 const chaiAsPromised = require("chai-as-promised");
 
