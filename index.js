@@ -15,7 +15,7 @@ mongoose.connect(
     } else {
       console.log("Conexión con Mongoose correctamente");
 
-      app.listen(port, () => {
+      app.listen(process.env.PORT, "0.0.0.0", () => {
         console.log("########################");
         console.log("##### KINGDOM GAMER ####");
         console.log("######## BACKEND #######");
