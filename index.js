@@ -7,7 +7,7 @@ require("dotenv").config();
 mongoose.set("useFindAndModify", false);
 
 mongoose.connect(
-  process.env.DB_CONN,
+  "mongodb+srv://camoralesl_97:SecureP@ssw0rd1997@kingdomgamer.pvils.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, res) => {
     if (err) {
