@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
-const { MAIL_USER, MAIL_PASSWORD } = require("../config");
+// const { MAIL_USER, MAIL_PASSWORD } = require("../config");
+require("dotenv").config();
 
 function sendEmailNewsletter(email) {
   let transporter = nodemailer.createTransport({
@@ -8,8 +9,8 @@ function sendEmailNewsletter(email) {
     // port: 587,
     // secure: false, // true for 465, false for other ports
     auth: {
-      user: MAIL_USER,
-      pass: MAIL_PASSWORD,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
@@ -52,8 +53,8 @@ function sendEmailRegister(name, lastname, email) {
     // port: 587,
     // secure: false, // true for 465, false for other ports
     auth: {
-      user: MAIL_USER,
-      pass: MAIL_PASSWORD,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 

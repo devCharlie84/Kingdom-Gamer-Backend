@@ -17,6 +17,8 @@ api.post(
   UserController.signUpAdmin
 );
 
+api.post("/sign-up-super-admin", UserController.signUpAdmin);
+
 api.get("/users", [middleware_auth.ensureAuth], UserController.getUsers);
 
 api.get(
@@ -24,6 +26,8 @@ api.get(
   [middleware_auth.ensureAuth],
   UserController.getUsersActive
 );
+
+api.get("/users-first-time", UserController.getUsers);
 
 api.get("/get-avatar/:avatarName", UserController.getAvatar);
 

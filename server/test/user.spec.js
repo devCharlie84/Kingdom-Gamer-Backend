@@ -24,7 +24,6 @@ describe("KingdomGamer Users API ", () => {
           response.body.users[0].should.have.property("_id");
           response.body.users[0].should.have.property("lastname");
           response.body.users[0].should.have.property("email");
-          response.body.users[0].should.have.property("role");
           response.body.users[0].should.have.property("active");
           response.body.users[0].should.have.property("password");
           response.body.users[0].should.have.property("avatar");
@@ -198,8 +197,8 @@ describe("KingdomGamer Users API ", () => {
   describe("POST /api/v1/sign-in", () => {
     it("It should POST the Login", (done) => {
       body = {
-        email: "camoralesl@correo.url.edu.gt",
-        password: "camoralesl123#",
+        email: "carlosmorales1284@hotmail.com",
+        password: "Charlie1284#",
       };
       chai
         .request(server)
