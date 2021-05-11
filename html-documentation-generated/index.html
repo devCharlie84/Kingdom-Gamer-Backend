@@ -1,0 +1,1439 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kingdom Gamer API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Kingdom Gamer API</h1>
+    <div class="app-desc">API de la página web de Kingdom Gamer</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="camoralesl@correo.url.edu.gt">camoralesl@correo.url.edu.gt</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/camoralesl/KingdomGamerAPI/1.0.0</div>
+    <div class="license-info">Github</div>
+    <div class="license-url">https://github.com/devCharlie84</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Enlace">Enlace</a></h4>
+  <ul>
+  <li><a href="#activateEnlace"><code><span class="http-method">put</span> /activate-enlace/:id</code></a></li>
+  <li><a href="#addEnlaces"><code><span class="http-method">post</span> /add-enlaces</code></a></li>
+  <li><a href="#deleteEnlace"><code><span class="http-method">delete</span> /delete-enlace/:id</code></a></li>
+  <li><a href="#getEnlaces"><code><span class="http-method">get</span> /get-enlaces</code></a></li>
+  <li><a href="#updateEnlace"><code><span class="http-method">put</span> /update-enlace/:id</code></a></li>
+  </ul>
+  <h4><a href="#Newsletter">Newsletter</a></h4>
+  <ul>
+  <li><a href="#suscribeNewsletter"><code><span class="http-method">post</span> /suscribe-newsletter/:email</code></a></li>
+  </ul>
+  <h4><a href="#Pokedex">Pokedex</a></h4>
+  <ul>
+  <li><a href="#addPokemon"><code><span class="http-method">post</span> /add-pokemon</code></a></li>
+  <li><a href="#deletePokemon"><code><span class="http-method">delete</span> /delete-pokemon/:id</code></a></li>
+  <li><a href="#getPokemon"><code><span class="http-method">get</span> /https://pokeapi.co/api/v2/pokemon</code></a></li>
+  <li><a href="#getPokemones"><code><span class="http-method">get</span> /get-pokemones</code></a></li>
+  <li><a href="#updatePokemon"><code><span class="http-method">put</span> /update-pokemon/:id</code></a></li>
+  </ul>
+  <h4><a href="#Post">Post</a></h4>
+  <ul>
+  <li><a href="#addPosts"><code><span class="http-method">post</span> /add-posts</code></a></li>
+  <li><a href="#deletePost"><code><span class="http-method">delete</span> /delete-post/:id</code></a></li>
+  <li><a href="#getPost"><code><span class="http-method">get</span> /get-post/:id</code></a></li>
+  <li><a href="#getPosts"><code><span class="http-method">get</span> /get-posts</code></a></li>
+  <li><a href="#updatePost"><code><span class="http-method">put</span> /update-post/:id</code></a></li>
+  </ul>
+  <h4><a href="#Usuarios">Usuarios</a></h4>
+  <ul>
+  <li><a href="#deleteUser"><code><span class="http-method">delete</span> /delete-user/:id</code></a></li>
+  <li><a href="#getUsers"><code><span class="http-method">get</span> /get-users</code></a></li>
+  <li><a href="#loginUser"><code><span class="http-method">post</span> /login</code></a></li>
+  <li><a href="#signupUser"><code><span class="http-method">post</span> /signup</code></a></li>
+  <li><a href="#updateUsuario"><code><span class="http-method">put</span> /update-user/:id</code></a></li>
+  </ul>
+
+  <h1><a name="Enlace">Enlace</a></h1>
+  <div class="method"><a name="activateEnlace"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /activate-enlace/:id</code></pre></div>
+    <div class="method-summary">Activa un enlace existente (<span class="nickname">activateEnlace</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Enlace">Enlace</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del enlace a activar o desactivar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Enlace activado/desactivado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún enlace
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addEnlaces"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /add-enlaces</code></pre></div>
+    <div class="method-summary">Agrega un enlace (<span class="nickname">addEnlaces</span>)</div>
+    <div class="method-notes">Agrega un enlace a la página web</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">enlaceBody <a href="#Enlace">Enlace</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Enlace creado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Error al crear enlace
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteEnlace"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /delete-enlace/:id</code></pre></div>
+    <div class="method-summary">Elimina un enlace existente (<span class="nickname">deleteEnlace</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Enlace">Enlace</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del enlace a eliminar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Enlace eliminado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Enlace no encontrado
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getEnlaces"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /get-enlaces</code></pre></div>
+    <div class="method-summary">Obtiene los enlaces (<span class="nickname">getEnlaces</span>)</div>
+    <div class="method-notes">Se obtienen los enlaces externos e internos de la página web</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Enlace">Enlace</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "active" : true,
+  "title" : "Blog",
+  "url" : "/Blog",
+  "order" : 0.0
+}, {
+  "active" : true,
+  "title" : "Blog",
+  "url" : "/Blog",
+  "order" : 0.0
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna un objeto con los enlaces
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún enlace
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateEnlace"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /update-enlace/:id</code></pre></div>
+    <div class="method-summary">Actualiza un enlace existente (<span class="nickname">updateEnlace</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Enlace">Enlace</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del enlace a actualizar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Enlace actualizado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún enlace
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Newsletter">Newsletter</a></h1>
+  <div class="method"><a name="suscribeNewsletter"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /suscribe-newsletter/:email</code></pre></div>
+    <div class="method-summary">Agrega una suscripción de Newsletter (<span class="nickname">suscribeNewsletter</span>)</div>
+    <div class="method-notes">Agrega una suscripción de Newsletter</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">postNewsletter <a href="#Newsletter">Newsletter</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Email suscrito en la Newsletter
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    message: El correo electrónico es obligatorio.
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Error al suscribirse en la Newsletter.
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: El correo electrónico ya está suscrito al Newsletter
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Pokedex">Pokedex</a></h1>
+  <div class="method"><a name="addPokemon"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /add-pokemon</code></pre></div>
+    <div class="method-summary">Agrega un Pokemon (<span class="nickname">addPokemon</span>)</div>
+    <div class="method-notes">Agrega un Pokemon a la Pokedex</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">postPokemon <a href="#Pokemon">Pokemon</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Pokemon creado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Error al crear el Pokemon
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deletePokemon"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /delete-pokemon/:id</code></pre></div>
+    <div class="method-summary">Elimina un Pokemon existente (<span class="nickname">deletePokemon</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Pokemon">Pokemon</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del Pokemon a eliminar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Pokemon eliminado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Pokemon no encontrado
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPokemon"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /https://pokeapi.co/api/v2/pokemon</code></pre></div>
+    <div class="method-summary">Obtiene el Pokemon con la api externa(PokeAPI) (<span class="nickname">getPokemon</span>)</div>
+    <div class="method-notes">Se obtienen un Pokemon en especifico</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Pokemon">Pokemon</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "apodo" : "Copito",
+  "base_experience" : 255.0,
+  "weight" : 12.5,
+  "type" : "dragon",
+  "idPokemon" : "1/pikachu",
+  "order" : 0.0,
+  "height" : 22.2
+}, {
+  "apodo" : "Copito",
+  "base_experience" : 255.0,
+  "weight" : 12.5,
+  "type" : "dragon",
+  "idPokemon" : "1/pikachu",
+  "order" : 0.0,
+  "height" : 22.2
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna el objeto del Pokemon por el ID brindado
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Pokemon
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPokemones"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /get-pokemones</code></pre></div>
+    <div class="method-summary">Obtiene los Pokemones (<span class="nickname">getPokemones</span>)</div>
+    <div class="method-notes">Se obtienen los pokemones de la página web</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Pokemon">Pokemon</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "apodo" : "Copito",
+  "base_experience" : 255.0,
+  "weight" : 12.5,
+  "type" : "dragon",
+  "idPokemon" : "1/pikachu",
+  "order" : 0.0,
+  "height" : 22.2
+}, {
+  "apodo" : "Copito",
+  "base_experience" : 255.0,
+  "weight" : 12.5,
+  "type" : "dragon",
+  "idPokemon" : "1/pikachu",
+  "order" : 0.0,
+  "height" : 22.2
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna un objeto con los Pokemones
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Pokemon
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updatePokemon"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /update-pokemon/:id</code></pre></div>
+    <div class="method-summary">Actualiza un Pokemon existente (<span class="nickname">updatePokemon</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Pokemon">Pokemon</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del Pokemon a actualizar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Pokemon actualizado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Pokemon
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Post">Post</a></h1>
+  <div class="method"><a name="addPosts"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /add-posts</code></pre></div>
+    <div class="method-summary">Agrega un post (<span class="nickname">addPosts</span>)</div>
+    <div class="method-notes">Agrega un post al blog</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">postBody <a href="#Post">Post</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Post creado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Error al crear el Post
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deletePost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /delete-post/:id</code></pre></div>
+    <div class="method-summary">Elimina un Post existente (<span class="nickname">deletePost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Post">Post</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del Post a eliminar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Post eliminado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Post no encontrado
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /get-post/:id</code></pre></div>
+    <div class="method-summary">Obtiene los posts (<span class="nickname">getPost</span>)</div>
+    <div class="method-notes">Se obtienen un Post en especifico</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Post">Post</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "date" : "12/03/2020",
+  "description" : "Esto es una descripción",
+  "title" : "Bloodborne",
+  "url" : "farm-echoes"
+}, {
+  "date" : "12/03/2020",
+  "description" : "Esto es una descripción",
+  "title" : "Bloodborne",
+  "url" : "farm-echoes"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna el objeto del post por el ID brindado
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Post
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPosts"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /get-posts</code></pre></div>
+    <div class="method-summary">Obtiene los posts (<span class="nickname">getPosts</span>)</div>
+    <div class="method-notes">Se obtienen los posts de la página web</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Post">Post</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "date" : "12/03/2020",
+  "description" : "Esto es una descripción",
+  "title" : "Bloodborne",
+  "url" : "farm-echoes"
+}, {
+  "date" : "12/03/2020",
+  "description" : "Esto es una descripción",
+  "title" : "Bloodborne",
+  "url" : "farm-echoes"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna un objeto con los posts
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Post
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updatePost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /update-post/:id</code></pre></div>
+    <div class="method-summary">Actualiza un Post existente (<span class="nickname">updatePost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Post">Post</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del post a actualizar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Post actualizado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Post
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Usuarios">Usuarios</a></h1>
+  <div class="method"><a name="deleteUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /delete-user/:id</code></pre></div>
+    <div class="method-summary">Elimina un Usuario existente (<span class="nickname">deleteUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#User">User</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del Usuario a eliminar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Usuario eliminado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Usuario no encontrado
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /get-users</code></pre></div>
+    <div class="method-summary">Obtiene los Usuarios (<span class="nickname">getUsers</span>)</div>
+    <div class="method-notes">Se obtienen los Usuarios de la página web</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#User">User</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "password" : "SecureP@ss123#",
+  "role" : "Pokemon Trainer",
+  "name" : "Carlos",
+  "active" : true,
+  "avatar" : "https://fondosmil.com/fondo/26539.jpg",
+  "email" : "email@correo.com",
+  "lastname" : "Morales"
+}, {
+  "password" : "SecureP@ss123#",
+  "role" : "Pokemon Trainer",
+  "name" : "Carlos",
+  "active" : true,
+  "avatar" : "https://fondosmil.com/fondo/26539.jpg",
+  "email" : "email@correo.com",
+  "lastname" : "Morales"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    returna un objeto con los Usuarios
+        
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Usuario
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="loginUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /login</code></pre></div>
+    <div class="method-summary">Iniciar Sesión (<span class="nickname">loginUser</span>)</div>
+    <div class="method-notes">Inicia Sesión a un Usuario a la página web</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">postUsuario <a href="#User">User</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    accessToken/refreshAccessToken
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Correo electrónico o contraseña inválido
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="signupUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /signup</code></pre></div>
+    <div class="method-summary">Agrega un Usuario (<span class="nickname">signupUser</span>)</div>
+    <div class="method-notes">Registra un Usuario a la página web</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">postUsuario <a href="#User">User</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; body del Post </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Usuario registrado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: Error al registrar el Usuario
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateUsuario"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /update-user/:id</code></pre></div>
+    <div class="method-summary">Actualiza un Usuario existente (<span class="nickname">updateUsuario</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Pokemon">Pokemon</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Se necesita el ID del Usuario a actualizar </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    message: Usuario actualizado
+        <a href="#"></a>
+    <h4 class="field-label">404</h4>
+    message: No se ha encontrado ningún Usuario
+        <a href="#"></a>
+    <h4 class="field-label">500</h4>
+    message: Error del servidor
+        <a href="#"></a>
+    <h4 class="field-label">503</h4>
+    message: La petición no tiene cabecera de autenticación
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#ApiResponse"><code>ApiResponse</code> - </a></li>
+    <li><a href="#Enlace"><code>Enlace</code> - </a></li>
+    <li><a href="#Newsletter"><code>Newsletter</code> - </a></li>
+    <li><a href="#Pokemon"><code>Pokemon</code> - </a></li>
+    <li><a href="#Post"><code>Post</code> - </a></li>
+    <li><a href="#User"><code>User</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="ApiResponse"><code>ApiResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">code (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Enlace"><code>Enlace</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">title </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Blog</span></div>
+<div class="param">url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: /Blog</span></div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">order </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 0.0</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Newsletter"><code>Newsletter</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: email@correo.com</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Pokemon"><code>Pokemon</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">idPokemon </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1/pikachu</span></div>
+<div class="param">apodo </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Copito</span></div>
+<div class="param">type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: dragon</span></div>
+<div class="param">order </div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 0.0</span></div>
+<div class="param">height (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 22.2</span></div>
+<div class="param">weight (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 12.5</span></div>
+<div class="param">base_experience (optional)</div><div class="param-desc"><span class="param-type"><a href="#number">BigDecimal</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 255.0</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Post"><code>Post</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">title </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Bloodborne</span></div>
+<div class="param">url </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: farm-echoes</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Esto es una descripción</span></div>
+<div class="param">date </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+          <div class="param-desc"><span class="param-type">example: 12/03/2020</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Carlos</span></div>
+<div class="param">lastname </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Morales</span></div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: email</div>
+          <div class="param-desc"><span class="param-type">example: email@correo.com</span></div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: password</div>
+          <div class="param-desc"><span class="param-type">example: SecureP@ss123#</span></div>
+<div class="param">role </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Pokemon Trainer</span></div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">avatar (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://fondosmil.com/fondo/26539.jpg</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
